@@ -4,6 +4,7 @@ export enum AppView {
   JOURNAL = 'JOURNAL', // Reflective Journal
   CULTURE = 'CULTURE', // Cultural Validation
   COMMUNITY = 'COMMUNITY', // Community Feedback
+  LIBRARY = 'LIBRARY', // Virtual Library
 }
 
 export interface AnalysisResult {
@@ -31,6 +32,15 @@ export interface JournalEntry {
   emotions: string[];
   tags: string[];
   aiReflection: string;
+}
+
+export interface LibraryItem {
+  id: string;
+  title: string;
+  story: string;
+  date: string;
+  image: string; // Base64 string
+  hasAudio: boolean; // Simulator flag for audio
 }
 
 export interface FeedbackData {

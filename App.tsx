@@ -4,7 +4,8 @@ import { TechnicalAssistant } from './components/TechnicalAssistant';
 import { Journal } from './components/Journal';
 import { CulturalValidator } from './components/CulturalValidator';
 import { CommunityFeedback } from './components/CommunityFeedback';
-import { Home, Camera, BookOpen, Users, Sparkles, Menu, ChevronRight } from 'lucide-react';
+import { Library } from './components/Library';
+import { Home, Camera, BookOpen, Users, Sparkles, Menu, ChevronRight, Library as LibraryIcon } from 'lucide-react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<AppView>(AppView.DASHBOARD);
@@ -20,6 +21,8 @@ export default function App() {
         return <CulturalValidator />;
       case AppView.COMMUNITY:
         return <CommunityFeedback />;
+      case AppView.LIBRARY:
+        return <Library />;
       default:
         return <Dashboard onViewChange={setCurrentView} />;
     }
@@ -51,7 +54,7 @@ export default function App() {
       </main>
 
       {/* Floating Bottom Navigation */}
-      <nav className="fixed bottom-4 left-4 right-4 bg-white border border-p-accent/30 rounded-2xl py-3 px-2 shadow-2xl z-20 flex justify-around items-center">
+      <nav className="fixed bottom-4 left-2 right-2 bg-white border border-p-accent/30 rounded-2xl py-2 px-1 shadow-2xl z-20 flex justify-between items-center">
           <NavButton 
             active={currentView === AppView.DASHBOARD} 
             onClick={() => setCurrentView(AppView.DASHBOARD)} 
@@ -65,6 +68,13 @@ export default function App() {
             icon={<Camera className="w-6 h-6" />} 
             label="Técnica"
             color="text-p-primary" 
+          />
+          <NavButton 
+            active={currentView === AppView.LIBRARY} 
+            onClick={() => setCurrentView(AppView.LIBRARY)} 
+            icon={<LibraryIcon className="w-6 h-6" />} 
+            label="Biblio" 
+            color="text-p-secondary"
           />
           <NavButton 
             active={currentView === AppView.JOURNAL} 
@@ -88,21 +98,21 @@ export default function App() {
 const NavButton = ({ active, onClick, icon, label, color }: { active: boolean, onClick: () => void, icon: React.ReactNode, label: string, color: string }) => (
   <button 
     onClick={onClick}
-    className={`flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-300 ${
+    className={`flex flex-col items-center gap-0.5 p-2 rounded-xl transition-all duration-300 w-1/5 ${
       active ? 'bg-paper -translate-y-2 shadow-md scale-110' : 'hover:bg-slate-50'
     }`}
   >
     <div className={`${active ? color : 'text-slate-400'} transition-colors`}>
       {icon}
     </div>
-    {active && <span className={`text-[10px] font-bold ${color}`}>{label}</span>}
+    {active && <span className={`text-[9px] font-bold ${color}`}>{label}</span>}
   </button>
 );
 
 const Dashboard = ({ onViewChange }: { onViewChange: (view: AppView) => void }) => (
   <div className="p-5 max-w-md mx-auto space-y-8 animate-fade-in">
     
-    {/* Welcome Card - Gamified */}
+    {/* Welcome Card */}
     <div className="bg-p-secondary rounded-3xl p-6 text-white shadow-card relative overflow-hidden">
       <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-2xl"></div>
       <div className="relative z-10">
@@ -122,7 +132,24 @@ const Dashboard = ({ onViewChange }: { onViewChange: (view: AppView) => void }) 
       </div>
     </div>
 
-    {/* Big Action Cards - Pedagogical & Colorful */}
+    {/* Library Highlight Card (New) */}
+    <div 
+        onClick={() => onViewChange(AppView.LIBRARY)}
+        className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl p-6 text-white shadow-card cursor-pointer transform hover:scale-[1.02] transition-transform"
+    >
+        <div className="flex items-center gap-4">
+            <div className="bg-white/20 p-3 rounded-full">
+                <LibraryIcon className="w-8 h-8 text-white" />
+            </div>
+            <div>
+                <h3 className="text-xl font-black">Mi Biblioteca</h3>
+                <p className="text-white/80 text-sm font-medium">Guarda tus obras con voz y foto</p>
+            </div>
+            <ChevronRight className="w-6 h-6 ml-auto text-white/50" />
+        </div>
+    </div>
+
+    {/* Big Action Cards */}
     <div>
       <h3 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
         <span className="w-2 h-8 bg-p-sun rounded-full"></span>
@@ -160,37 +187,6 @@ const Dashboard = ({ onViewChange }: { onViewChange: (view: AppView) => void }) 
             <ChevronRight className="w-5 h-5 text-slate-400" />
           </div>
         </button>
-      </div>
-    </div>
-
-    {/* Projects Progress */}
-    <div>
-      <h3 className="text-xl font-bold text-ink mb-4 flex items-center gap-2">
-        <span className="w-2 h-8 bg-p-highlight rounded-full"></span>
-        Mis Proyectos
-      </h3>
-      <div className="space-y-4">
-        <div className="bg-white p-5 rounded-3xl border-b-4 border-slate-100 shadow-sm">
-          <div className="flex justify-between items-center mb-2">
-            <h4 className="font-bold text-lg text-ink">🧣 Bufanda de Alpaca</h4>
-            <span className="bg-p-sun px-3 py-1 rounded-full text-xs font-bold text-ink">75%</span>
-          </div>
-          <div className="w-full bg-slate-100 h-4 rounded-full overflow-hidden">
-            <div className="bg-p-primary h-full rounded-full w-3/4 shadow-sm"></div>
-          </div>
-          <p className="text-xs text-slate-400 mt-2 font-medium">¡Casi terminas! Faltan los acabados.</p>
-        </div>
-
-        <div className="bg-white p-5 rounded-3xl border-b-4 border-slate-100 shadow-sm">
-          <div className="flex justify-between items-center mb-2">
-            <h4 className="font-bold text-lg text-ink">🧤 Guantes Festivos</h4>
-            <span className="bg-slate-200 px-3 py-1 rounded-full text-xs font-bold text-slate-600">30%</span>
-          </div>
-          <div className="w-full bg-slate-100 h-4 rounded-full overflow-hidden">
-            <div className="bg-p-teal h-full rounded-full w-1/3 shadow-sm"></div>
-          </div>
-           <p className="text-xs text-slate-400 mt-2 font-medium">Recién comenzando la iconografía.</p>
-        </div>
       </div>
     </div>
   </div>
