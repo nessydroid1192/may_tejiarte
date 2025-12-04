@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TejAI - Tejeduría Andina</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'p-primary': '#E63946', // Andean Red (Action/Alert)
+              'p-secondary': '#457B9D', // Deep Blue (Structure)
+              'p-accent': '#A8DADC', // Soft Blue (Backgrounds)
+              'p-highlight': '#F4A261', // Orange (Warmth)
+              'p-sun': '#E9C46A', // Yellow (Success)
+              'p-teal': '#2A9D8F', // Turquoise (Culture/Nature)
+              'paper': '#F1FAEE', // Off-white clean background
+              'ink': '#1D3557', // High contrast text
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Merriweather', 'serif'], 
+            },
+            boxShadow: {
+              'pedagogical': '0 4px 0 0 rgba(0,0,0,0.1)', // "Pressable" button feel
+              'card': '0 8px 20px rgba(0,0,0,0.05)',
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-paper text-ink antialiased selection:bg-p-sun selection:text-ink">
+    <div id="root"></div>
+  </body>
+</html>

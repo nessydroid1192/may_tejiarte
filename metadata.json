@@ -1,0 +1,8 @@
+{
+  "name": "TejAI",
+  "description": "Asistente inteligente para la preservación y enseñanza de la tejeduría andina, integrando visión artificial y saberes ancestrales.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
